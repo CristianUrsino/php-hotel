@@ -1,9 +1,41 @@
 <?php
 include __DIR__ . '/partials/header.php';
-
+if(!empty($_GET['parking']) && $_GET['minVote']){
+    $parking = $_GET['parking'];
+    //SE METTESSI DIRETTAMENTE 1/0 NON ENTREREBBE IN QUANTO VIENE CONSIDERATO 'EMPTY'
+    $parking--;
+    $minVote = $_GET['minVote'];
+    $tempArr = [];
+    foreach($hotels as $hotel){
+        if($parking === (int)$hotel['parking'] && $minVote <= $hotel['vote']){
+            $tempArr[] = $hotel;
+        }
+    }
+    $hotels = $tempArr;
+}elseif(!empty($_GET['parking'])){
+    $parking = $_GET['parking'];
+    $parking--;
+    $tempArr = [];
+    foreach($hotels as $hotel){
+        if($parking === (int)$hotel['parking']){
+            $tempArr[] = $hotel;
+        }
+    }
+    $hotels = $tempArr;
+}elseif(isset($_GET['minVote'])){
+    $minVote = $_GET['minVote'];
+    $tempArr = [];
+    foreach($hotels as $hotel){
+        if($minVote <= $hotel['vote']){
+            $tempArr[] = $hotel;
+        }
+    }
+    $hotels = $tempArr;
+}
 ?>
 <body>
-    <main>
+    <main class="container">
+        <?php if(count($hotels) > 0){ ?>
         <table class="table">
             <thead>
                 <tr>
@@ -20,9 +52,9 @@ include __DIR__ . '/partials/header.php';
                     foreach($hotel as $key => $value){
                         if($key === 'parking'){
                             if($value){
-                                echo '<td><i class="fa-solid fa-check"></i></td>';
+                                echo '<td><i class="fa-solid fa-check color-green"></i></td>';
                             }else{
-                                echo '<td><i class="fa-solid fa-xmark"></i></td>';
+                                echo '<td><i class="fa-solid fa-xmark color-red"></i></td>';
                             }
                         }elseif($key === 'vote'){
                             echo '<td>';
@@ -45,6 +77,7 @@ include __DIR__ . '/partials/header.php';
                 } ?>
             </tbody>
         </table>
+        <?php }else{echo '<h5 class="text-center my-5">NESSUN ELEMENTO TROVATO</h5>';} ?>
     </main>
     <?php include __DIR__ . '/partials/footer.php'; ?>
 </body>

@@ -1,1 +1,1 @@
-<footer>@Created by boolean</footer>
+<footer class="container">@Created by boolean</footer>

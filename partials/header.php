@@ -13,5 +13,18 @@ include __DIR__ . '/../Model/db.php';
     <title>PHP-HOTEL</title>
 </head>
 <body>
-    <header>HEADER</header>
+    <header >
+        <form action="index.php" method="GET" class="d-flex justify-content-between container my-3">
+            <select name="parking">
+                <option value="">with/without parking</option>
+                <option value="2">with parking</option>
+                <option value="1">without parking</option>
+            </select>
+            <div>
+                <label for="minVote">minimum vote</label>
+                <input type="number" min="0" max="5" name="minVote">
+            </div>
+            <input type="submit">
+        </form>
+    </header>
 </body>

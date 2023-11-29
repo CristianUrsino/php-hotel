@@ -1,4 +1,10 @@
 /* UTILITYS */
 .color-gold{
-    color:#cd9501
+    color:#cd9501 !important;
+}
+.color-red{
+    color:red !important;
+}
+.color-green{
+    color:green !important;
 }
